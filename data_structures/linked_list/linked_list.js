@@ -47,11 +47,13 @@ class LinkedList {
   }
 
   delete(x) {
-    
+
   }
 
   shift() {
-
+    const value = this.start.item;
+    this.start = this.start.next;
+    return value;
   }
 
   pop() {
@@ -60,10 +62,40 @@ class LinkedList {
 }
 
 
-const li = new LinkedList();
-li.insert(1);
-li.insert(2);
-li.insert(3);
-console.log(li.search(101));
 
-console.log(li.values());
+
+function testInsert() {
+  li.insert(1);
+  li.insert(2);
+  li.insert(3);
+
+  console.log('----LinkedList----');
+  console.log(li.values());
+  console.log('----LinkedList----');
+}
+
+function testSearch() {
+  console.log('Searching 101 in list: ', li.search(101));
+  console.log('Searching 1 in list: ', li.search(1));
+}
+
+function testShift() {
+  let val = li.shift();
+  console.log('shift val: ', val);
+  console.log('----LinkedList----');
+  console.log(li.values());
+  console.log('----LinkedList----');
+
+  val = li.shift();
+  console.log('shift val: ', val);
+  console.log('----LinkedList----');
+  console.log(li.values());
+  console.log('----LinkedList----');
+}
+
+const li = new LinkedList();
+testInsert();
+console.log('\n');
+testSearch();
+console.log('\n');
+testShift();
