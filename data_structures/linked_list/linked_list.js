@@ -1,11 +1,3 @@
-class Node {
-  constructor(x, node) {
-    this.item = x;
-    this.next = node;
-  }
-}
-
-
 class LinkedList {
   constructor() {
     this.start = null;
@@ -22,8 +14,7 @@ class LinkedList {
     return values;
   }
 
-  // TODO обдумать + цикл for of
-  fromArray(){
+  fromArray() {
 
   }
 
@@ -57,45 +48,14 @@ class LinkedList {
   }
 
   pop() {
+    let currentNode = this.start;
+    let prevNode;
+    do {
+      prevNode = currentNode;
+    } while (currentNode = currentNode.next);
 
+    prevNode.next = null;
+
+    return currentNode.item;
   }
 }
-
-
-
-
-function testInsert() {
-  li.insert(1);
-  li.insert(2);
-  li.insert(3);
-
-  console.log('----LinkedList----');
-  console.log(li.values());
-  console.log('----LinkedList----');
-}
-
-function testSearch() {
-  console.log('Searching 101 in list: ', li.search(101));
-  console.log('Searching 1 in list: ', li.search(1));
-}
-
-function testShift() {
-  let val = li.shift();
-  console.log('shift val: ', val);
-  console.log('----LinkedList----');
-  console.log(li.values());
-  console.log('----LinkedList----');
-
-  val = li.shift();
-  console.log('shift val: ', val);
-  console.log('----LinkedList----');
-  console.log(li.values());
-  console.log('----LinkedList----');
-}
-
-const li = new LinkedList();
-testInsert();
-console.log('\n');
-testSearch();
-console.log('\n');
-testShift();
