@@ -14,8 +14,11 @@ class LinkedList {
     return values;
   }
 
-  fromArray() {
-
+  fromArray(arr) {
+    this.start = null;
+    for(let i = arr.length - 1; i >= 0; --i) {
+        this.insert(arr[i]);
+    }
   }
 
   search(x) {
@@ -38,7 +41,25 @@ class LinkedList {
   }
 
   delete(x) {
+    let iterNode = this.start;
+    let lastNode = iterNode;
+    let prevNode;
+    let found = false;
 
+    do {
+      prevNode = lastNode;
+      lastNode = iterNode;
+      if (lastNode.item === x) {
+        found = true;
+        break;
+      }
+      iterNode = iterNode.next;
+    } while(iterNode);
+
+    if (found) {
+      // TODO
+      prevNode.next = iterNode;
+    }
   }
 
   shift() {
@@ -66,5 +87,9 @@ class LinkedList {
     }
 
     return item;
+  }
+
+  _unlinkNode(node) {
+
   }
 }
