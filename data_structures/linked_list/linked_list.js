@@ -49,13 +49,22 @@ class LinkedList {
 
   pop() {
     let currentNode = this.start;
+    let lastNode;
     let prevNode;
+
     do {
-      prevNode = currentNode;
-    } while (currentNode = currentNode.next);
+      prevNode = lastNode;
+      lastNode = currentNode;
+      currentNode = currentNode.next;
+    } while (currentNode);
 
-    prevNode.next = null;
+    let item = lastNode.item;
+    if (!prevNode) {
+      this.start = null;
+    } else {
+      prevNode.next = null;
+    }
 
-    return currentNode.item;
+    return item;
   }
 }

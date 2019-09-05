@@ -34,9 +34,10 @@ function testShift() {
 
 function testPop() {
   console.log('***Pop test***');
-  li.pop();
-  li.pop();
-  li.pop();
+  const listSize = li.values().length;
+  for (let i = 0; i < listSize - 1; ++i) {
+    li.pop();
+  }
   printList(li);
   console.log('***End of pop test***');
 }
@@ -46,4 +47,11 @@ testInsert();
 console.log('\n');
 testSearch();
 console.log('\n');
+
+for(let i = 0; i < 10; ++i) {
+  li.insert(i);
+}
+console.log('List before pop:');
+printList(li);
+console.log('');
 testPop();
