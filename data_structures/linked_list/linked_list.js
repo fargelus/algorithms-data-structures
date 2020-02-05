@@ -88,8 +88,4 @@ class LinkedList {
 
     return item;
   }
-
-  _unlinkNode(node) {
-
-  }
 }
