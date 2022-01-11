@@ -29,11 +29,35 @@ class PriorityQueue
   def to_s
     @store.map(&:to_s).to_s
   end
+
+  def change(value, priority)
+    qis = @store.select { |qi| qi.value == value }
+    return push(value, priority) if qis.empty?
+
+    qis.each { |qi| qi.priority = priority }
+  end
+
+  def del(value)
+    qis = @store.select { |qi| qi.value == value }
+    qis.each do |qi|
+      del_index = @store.index(qi)
+      @store.delete_at(del_index)
+    end
+  end
 end
 
 pq = PriorityQueue.new
 pq.push('a', 1)
 pq.push('b', 2)
+pq.push('c', 2)
 puts pq # a, b
 puts pq.pop # 'b'
-puts pq # 'a'
+puts pq # ['a', 'c']
+
+pq.change('a', 3)
+puts pq.pop # 'a'
+pq.change('z', 2)
+puts pq # ['c', 'z']
+
+pq.del('z')
+puts pq # ['c']
