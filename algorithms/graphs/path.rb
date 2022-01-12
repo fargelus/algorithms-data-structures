@@ -1,20 +1,28 @@
-def traverse(graph, start, goal)
+def path(graph, start, goal)
   unexplored = Queue.new
   unexplored << start
-  passed = { start => true }
+  came_from = { start => nil }
   while (current = unexplored.pop) do
     break if current == goal
 
     graph[current].each do |neighbor|
-      next if passed.has_key?(neighbor)
+      next if came_from.has_key?(neighbor)
 
       unexplored << neighbor
-      passed[neighbor] = true
+      came_from[neighbor] = current
     end
   end
 
-  passed.keys
+  point = goal
+  frontier = [goal]
+  while came_from[point]
+    frontier << came_from[point]
+    point = came_from[point]
+  end
+
+  frontier.reverse
 end
+
 
 graph = {'A' => ['B', 'C'],
          'B' => ['C', 'E'],
@@ -22,4 +30,5 @@ graph = {'A' => ['B', 'C'],
          'D' => ['C'],
          'E' => ['D'],
          'F' => ['C']}
-puts traverse(graph, 'A', 'D') # [A B C E F D]
+puts path(graph, 'A', 'D').inspect # [A B E D]
+puts path(graph, 'B', 'F').inspect # [B C F]
